@@ -1,0 +1,68 @@
+SQL> create table users(
+  2  id number(10),
+  3  password varchar(20));
+
+Table created.
+
+SQL> alter table users
+  2  add primary key(id);
+
+
+SQL> create table send(
+  2  id number(10),
+  3  sent number(10),
+  4  primary key(id,sent),
+  5  foreign key (id) references users(id),
+  6  foreign key (sent) references users(id));
+
+Table created.
+
+SQL> create table receive(
+  2  id number(10),
+  3  received number(10),
+  4  foreign key (id) references users(id),
+  5  foreign key (received) references users(id));
+
+Table created.
+
+
+SQL> create table chat(
+  2  cid number(4),
+  3  msg varchar(100));
+
+Table created.
+
+SQL> create table chatting(
+  2  id number(10),
+  3  cid number(4),
+  4  primary key(id,cid));
+
+Table created.
+
+SQL> alter table chat
+  2  add primary key(cid);
+
+Table altered.
+
+SQL> alter table chatting
+  2  add foreign key(id) references users(id);
+
+Table altered.
+
+SQL> alter table chatting
+  2  add foreign key(cid) references chat(cid);
+
+Table altered.
+SQL> create table contacts(
+  2  id number(10),
+  3  contact number(10),
+  4  primary key(id,contact),
+  5  foreign key(id) references users(id),
+  6  foreign key(contact) references users(id));
+
+Table created.
+
+
+
+
+
